@@ -146,6 +146,30 @@ html, body {
   text-align: right;
 }
 
+.portfolio_a {
+  text-decoration: none;
+  color: inherit;
+  display: inline;
+  position: relative;
+}
+.portfolio_a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #2f2f2f;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.portfolio_a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
 .portfolio_p_indicator {
   font-size: 13px;
 }
