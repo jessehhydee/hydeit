@@ -125,3 +125,27 @@ const bgAnimation = () => {
 }
 
 bgAnimation();
+
+
+let aboutContainer,
+portfolioContainer,
+aboutTimeline,
+portfolioTimeline;
+
+aboutContainer      = document.querySelector('.about_container');
+portfolioContainer  = document.querySelector('.portfolio_container');
+
+aboutTimeline       = gsap.timeline({repeat:-1});
+portfolioTimeline   = gsap.timeline({repeat:-1});
+
+const animateElements = () => {
+
+  aboutTimeline.to(aboutContainer, {y: 30, duration: 6, ease: Sine.easeInOut})
+                .to(aboutContainer, {y: 0, duration: 6, ease: Sine.easeInOut});
+
+  portfolioTimeline.to(portfolioContainer, {y: 15, duration: 5, ease: Sine.easeInOut})
+                    .to(portfolioContainer, {y: 0, duration: 5, ease: Sine.easeInOut});
+
+}
+
+animateElements();
