@@ -1,24 +1,47 @@
-let viewportContainer,
+let 
+viewportContainer,
 bgCanvas,
-lightTimeline,
+lightTimelineOne,
 lightTimelineTwo,
 scene, 
 geometry, 
 material, 
 plane, 
-pointLight, 
-pointLight2,  
+pointLightOne, 
+pointLightTwo,
 bgfov, 
 bgPlaneAspectRatio,
 camera,
 sizes,
-renderer;
+renderer,
+themeColors,
+currentTheme,
+colorCubeBtns;
 
-viewportContainer   = document.querySelector('.veiwport_container');
-bgCanvas            = document.querySelector('.bg_webgl');
+themeColors = {
+  brown:  {
+    light:      0xfaebd7,
+    container:  '#faebd7'
+  },
+  blue:  {
+    light:      0xa6d3e9,
+    container:  '#a6d3e9'
+  },
+  green:  {
+    light:      0xa9e9a6,
+    container:  '#a9e9a6'
+  },
+  purple:  {
+    light:      0xbca6e9,
+    container:  '#bca6e9'
+  },
+};
+currentTheme      = themeColors.brown;
 
-lightTimeline       = gsap.timeline({repeat:-1});
-lightTimelineTwo    = gsap.timeline({repeat:-1});
+viewportContainer = document.querySelector('.veiwport_container');
+bgCanvas          = document.querySelector('.bg_webgl');
+
+colorCubeBtns     = document.querySelectorAll(".color_cube");
 
 const bgAnimation = () => {
 
@@ -26,33 +49,37 @@ const bgAnimation = () => {
 
   const createGeometry = () => {
 
-    geometry  = new THREE.PlaneGeometry( 60, 60 );
-    material  = new THREE.MeshStandardMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
-    plane     = new THREE.Mesh( geometry, material );
+    geometry  = new THREE.PlaneGeometry(60, 60);
+    material  = new THREE.MeshStandardMaterial({color: 0xffffff, side: THREE.DoubleSide});
+    plane     = new THREE.Mesh(geometry, material);
     plane.position.set(0, 0, -6);
-    scene.add( plane );
+    scene.add(plane);
 
   }
 
   const createLights = () => {
 
-    pointLight = new THREE.PointLight( 0xfaebd7, 10, 30 );
-    pointLight.position.set(17.79, -2, -2);
-    scene.add( pointLight );
+    lightTimelineOne = lightTimelineTwo = gsap.timeline({repeat: -1});
 
-    lightTimeline.to(pointLight, {intensity: 17, duration: 7, ease: Sine.easeInOut})
-      .to(pointLight, {intensity: 7, duration: 7, ease: Sine.easeInOut})
-      .to(pointLight, {intensity: 12, duration: 7, ease: Sine.easeInOut})
-      .to(pointLight, {intensity: 10, duration: 7, ease: Sine.easeInOut});
+    pointLightOne = new THREE.PointLight(currentTheme.light, 10, 30);
+    pointLightOne.position.set(17.79, -2, -2);
+    scene.add(pointLightOne);
 
-    const pointLight2 = new THREE.PointLight( 0xfaebd7, 10, 40 );
-    pointLight2.position.set(-24, 20, -2);
-    scene.add( pointLight2 );
+    lightTimelineOne
+      .to(pointLightOne, {intensity: 17, duration: 7, ease: Sine.easeInOut})
+      .to(pointLightOne, {intensity: 7, duration: 7, ease: Sine.easeInOut})
+      .to(pointLightOne, {intensity: 12, duration: 7, ease: Sine.easeInOut})
+      .to(pointLightOne, {intensity: 10, duration: 7, ease: Sine.easeInOut});
+
+    pointLightTwo = new THREE.PointLight(currentTheme.light, 10, 40);
+    pointLightTwo.position.set(-24, 20, -2);
+    scene.add(pointLightTwo);
       
-    lightTimelineTwo.to(pointLight2, {intensity: 27, duration: 5, ease: Sine.easeInOut})
-      .to(pointLight2, {intensity: 7, duration: 5, ease: Sine.easeInOut})
-      .to(pointLight2, {intensity: 12, duration: 5, ease: Sine.easeInOut})
-      .to(pointLight2, {intensity: 10, duration: 5, ease: Sine.easeInOut});
+    lightTimelineTwo
+      .to(pointLightTwo, {intensity: 27, duration: 5, ease: Sine.easeInOut})
+      .to(pointLightTwo, {intensity: 7, duration: 5, ease: Sine.easeInOut})
+      .to(pointLightTwo, {intensity: 12, duration: 5, ease: Sine.easeInOut})
+      .to(pointLightTwo, {intensity: 10, duration: 5, ease: Sine.easeInOut});
 
   }
 
@@ -70,7 +97,7 @@ const bgAnimation = () => {
     bgfov               = 50;           // https://discourse.threejs.org/t/keeping-an-object-scaled-based-on-the-bounds-of-the-canvas-really-battling-to-explain-this-one/17574/9
     bgPlaneAspectRatio  = 16 / 9;
 
-    camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000);
+    camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 50);
     camera.position.set(0, 0, 13);
     scene.add(camera);
 
@@ -124,28 +151,38 @@ const bgAnimation = () => {
 
 }
 
-bgAnimation();
+const updateTheme = (color) => {
 
+  const updateLights = () => {
 
-let aboutContainer,
-portfolioContainer,
-aboutTimeline,
-portfolioTimeline;
+    const colorChangeTimeline = gsap.timeline();
+    const colour              = new THREE.Color(themeColors[color].light);
+  
+    colorChangeTimeline
+      .to(pointLightOne.color, {r: colour.r, g: colour.g, b: colour.b, duration: 2, ease: Sine.easeInOut})
+      .to(pointLightTwo.color, {r: colour.r, g: colour.g, b: colour.b, duration: 3, ease: Sine.easeInOut});
 
-aboutContainer      = document.querySelector('.about_container');
-portfolioContainer  = document.querySelector('.portfolio_container');
+  }
 
-aboutTimeline       = gsap.timeline({repeat:-1});
-portfolioTimeline   = gsap.timeline({repeat:-1});
+  const updateActiveColorCube = () => {
 
-const animateElements = () => {
+    for(const btn of colorCubeBtns) btn.classList.remove('active_color_cube');
+    document.querySelector(`.${color}`).classList.add('active_color_cube');
 
-  aboutTimeline.to(aboutContainer, {y: 30, duration: 6, ease: Sine.easeInOut})
-                .to(aboutContainer, {y: 0, duration: 6, ease: Sine.easeInOut});
+  }
 
-  portfolioTimeline.to(portfolioContainer, {y: 15, duration: 5, ease: Sine.easeInOut})
-                    .to(portfolioContainer, {y: 0, duration: 5, ease: Sine.easeInOut});
+  const updateContainers = () => {
+
+    document.querySelector('.about_container').style.backgroundColor = `${currentTheme.container}9d`;
+    document.querySelector('.portfolio_container').style.backgroundColor = `${currentTheme.container}4f`;
+    currentTheme = themeColors[color];
+
+  }
+
+  updateLights();
+  updateActiveColorCube();
+  updateContainers();
 
 }
 
-animateElements();
+bgAnimation();

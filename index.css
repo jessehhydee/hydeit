@@ -34,40 +34,25 @@ html, body {
   border-right: 1px solid #eeeeee;
 }
 
-.name_logo_a {
-  color: #2f2f2f;
-  text-decoration: none;
-}
 .name_logo {
   margin: 40px 0px 0px;
   padding: 0px;
   font-family: 'Encode Sans', sans-serif;
   font-size: 90px;
   font-weight: 900;
+  color: #2f2f2f;
   position: absolute;
   z-index: 9;
+  cursor: crosshair;
+}
+.name_logo_hyde {
+  margin: 130px 0px 0px;
 }
 @supports (-webkit-text-stroke: 1px #2f2f2f) or (-webkit-text-fill-color: #ffffff00) {
   .name_logo:hover {
     -webkit-text-stroke: 1px #2f2f2f;
     -webkit-text-fill-color: #ffffff00;
   }
-}
-
-.info_container {
-  height: auto;
-  width: auto;
-  position: absolute;
-  bottom: 30px;
-  right: 0px;
-}
-
-.info_p {
-  font-family: 'Encode Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 200;
-  line-height: 1;
-  text-align: right;
 }
 
 .internal_margins_padding {
@@ -84,30 +69,31 @@ html, body {
 .about_container {
   height: auto;
   width: 400px;
-  background-color: #faebd7d5;
-  background-color: #faebd7;
+  background-color: #faebd79d;
+  backdrop-filter: blur(10px);
   border-top-left-radius: 25px;
   border-bottom: 2px solid #2f2f2f;
   position: absolute;
   top: 330px;
   padding: 30px 20px 40px;
   z-index: 9;
+  transition: 1200ms ease-in-out;
 }
 
 .circular_container {
   width: 110px;
   height: auto;
-  transition: all .5s ease-in-out;
+  transition: 500ms ease-in-out;
 }
 .circular_container:hover {
   transform: scale(1.4);
+  cursor: crosshair;
 }
 
 .circular {
   width: 100%;
   height: auto;
   animation: spinner 20s linear infinite;
-  transition: all .2s ease-in-out;
 }
 @keyframes spinner {
   0% { transform: rotate(360deg); }
@@ -117,20 +103,22 @@ html, body {
 .about_p {
   font-family: 'Encode Sans', sans-serif;
   font-size: 20px;
-  font-weight: 200;
+  font-weight: 400;
   line-height: 1.8;
 }
 
 .portfolio_container {
   height: 450px;
   width: 85%;
-  background-color: #ebd7be;
+  background-color: #faebd74f;
+  backdrop-filter: blur(10px);
   border-top-left-radius: 25px;
   border-bottom: 2px solid #2f2f2f;
   position: absolute;
   top: 130px;
   right: 0px;
   padding: 30px 20px 40px;
+  transition: 2500ms ease-in-out;
 }
 
 .portfolio_p_container {
@@ -169,7 +157,57 @@ html, body {
   transform-origin: bottom left;
 }
 
-
 .portfolio_p_indicator {
   font-size: 13px;
+}
+
+.color_change_container {
+  height: auto;
+  width: auto;
+  position: absolute;
+  bottom: 30px;
+  left: 0px;
+}
+
+.color_cube {
+  height: 40px;
+  width: 5px;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: 400ms;
+}
+.color_cube:hover {
+  width: 30px;
+}
+.brown {
+  background-color: #faebd7;
+}
+.blue {
+  background-color: #a6d3e9;
+}
+.green {
+  background-color: #a9e9a6;
+}
+.purple {
+  background-color: #bca6e9;
+}
+.active_color_cube {
+  width: 30px;
+}
+
+.info_container {
+  height: auto;
+  width: auto;
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
+}
+
+.info_p {
+  font-family: 'Encode Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 1;
+  text-align: right;
+  margin-bottom: 0px;
 }
