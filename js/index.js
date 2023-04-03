@@ -31,9 +31,9 @@ themeColors = {
     light:      0xa9e9a6,
     container:  '#a9e9a6'
   },
-  purple:  {
-    light:      0xbca6e9,
-    container:  '#bca6e9'
+  lime:   {
+    light:      0xd8e9a6,
+    container:  '#d8e9a6'
   },
 };
 currentTheme      = themeColors.brown;

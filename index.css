@@ -31,7 +31,7 @@ html, body {
   margin: 0px auto;
   position: relative;
   border-left: 1px solid #eeeeee;
-  border-right: 1px solid #eeeeee;
+  border-right: 1px solid #d8e9a6;
 }
 
 .name_logo {
@@ -47,12 +47,6 @@ html, body {
 }
 .name_logo_hyde {
   margin: 130px 0px 0px;
-}
-@supports (-webkit-text-stroke: 1px #2f2f2f) or (-webkit-text-fill-color: #ffffff00) {
-  .name_logo:hover {
-    -webkit-text-stroke: 1px #2f2f2f;
-    -webkit-text-fill-color: #ffffff00;
-  }
 }
 
 .internal_margins_padding {
@@ -128,10 +122,15 @@ html, body {
 
 .portfolio_p {
   font-family: 'Encode Sans', sans-serif;
-  font-size: 23px;
+  font-size: 14px;
   font-weight: 200;
-  line-height: 1.8;
   text-align: right;
+  color: #2f2f2f;
+}
+
+.project_title {
+  font-size: 40px;
+  font-weight: 900;
 }
 
 .portfolio_a {
@@ -155,10 +154,6 @@ html, body {
 .portfolio_a:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
-}
-
-.portfolio_p_indicator {
-  font-size: 13px;
 }
 
 .color_change_container {
@@ -188,8 +183,8 @@ html, body {
 .green {
   background-color: #a9e9a6;
 }
-.purple {
-  background-color: #bca6e9;
+.lime {
+  background-color: #d8e9a6;
 }
 .active_color_cube {
   width: 30px;
@@ -210,4 +205,15 @@ html, body {
   line-height: 1;
   text-align: right;
   margin-bottom: 0px;
+}
+
+@supports (-webkit-text-stroke: 1px #2f2f2f) or (-webkit-text-fill-color: #ffffff00) {
+  .name_logo:hover {
+    -webkit-text-stroke: 1px #2f2f2f;
+    -webkit-text-fill-color: #ffffff00;
+  }
+  .project_title:hover {
+    -webkit-text-stroke: 1px #2f2f2f;
+    -webkit-text-fill-color: #ffffff00;
+  }
 }
