@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 let 
 viewportContainer,
 bgCanvas,
@@ -16,7 +18,11 @@ sizes,
 renderer,
 themeColors,
 currentTheme,
-colorCubeBtns;
+colorCubeBtns,
+brownBtn,
+blueBtn,
+greenBtn,
+limeBtn;
 
 themeColors = {
   brown:  {
@@ -40,8 +46,11 @@ currentTheme      = themeColors.brown;
 
 viewportContainer = document.querySelector('.veiwport_container');
 bgCanvas          = document.querySelector('.bg_webgl');
-
 colorCubeBtns     = document.querySelectorAll(".color_cube");
+brownBtn          = document.querySelector(".brown");
+blueBtn           = document.querySelector(".blue");
+greenBtn          = document.querySelector(".green");
+limeBtn           = document.querySelector(".lime");
 
 const bgAnimation = () => {
 
@@ -50,7 +59,7 @@ const bgAnimation = () => {
   const createGeometry = () => {
 
     geometry  = new THREE.PlaneGeometry(60, 60);
-    material  = new THREE.MeshStandardMaterial({color: 0xffffff, side: THREE.DoubleSide});
+    material  = new THREE.MeshStandardMaterial({color: 0xffffff});
     plane     = new THREE.Mesh(geometry, material);
     plane.position.set(0, 0, -6);
     scene.add(plane);
@@ -94,7 +103,7 @@ const bgAnimation = () => {
 
   const createCamera = () => {
 
-    bgfov               = 50;           // https://discourse.threejs.org/t/keeping-an-object-scaled-based-on-the-bounds-of-the-canvas-really-battling-to-explain-this-one/17574/9
+    bgfov               = 50;  // https://discourse.threejs.org/t/keeping-an-object-scaled-based-on-the-bounds-of-the-canvas-really-battling-to-explain-this-one/17574/9
     bgPlaneAspectRatio  = 16 / 9;
 
     camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 50);
@@ -173,7 +182,6 @@ const updateTheme = (color) => {
 
   const updateContainers = () => {
 
-    document.querySelector('.about_container').style.backgroundColor = `${currentTheme.container}9d`;
     document.querySelector('.portfolio_container').style.backgroundColor = `${currentTheme.container}4f`;
     currentTheme = themeColors[color];
 
@@ -184,5 +192,10 @@ const updateTheme = (color) => {
   updateContainers();
 
 }
+
+brownBtn.addEventListener('click', updateTheme.bind(this, 'brown'));
+blueBtn.addEventListener('click', updateTheme.bind(this, 'blue'));
+greenBtn.addEventListener('click', updateTheme.bind(this, 'green'));
+limeBtn.addEventListener('click', updateTheme.bind(this, 'lime'));
 
 bgAnimation();

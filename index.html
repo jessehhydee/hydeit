@@ -25,8 +25,15 @@
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" type="text/css" href="index.css">
 
-    <script src="js/three.min.js"></script>
-    <script src="js/gsap.min.js"></script>
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.141.0/build/three.module.js"
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   </head>
 
@@ -40,44 +47,25 @@
 
   <body>
 
+    <canvas class="bg_webgl"></canvas>
+
     <div class="veiwport_container">
 
       <div class="margins_container">
 
         <h1 class="name_logo">JESSE</h1>
   
-        <div class="internal_margins_padding left right">
+        <div class="internal_margins_padding">
 
           <h1 class="name_logo name_logo_hyde">HYDE</h1>
-  
-          <div class="about_container">
-  
-            <div class="circular_container">
-              <img class="circular" src="img/circular.png" alt="Circular">
-            </div>
-  
-            <p class="about_p">
-              Welcome - I don't have much to say, so let my projects do the talking.
-              <br><br>
-              // js
-              <br>
-              &nbsp;&nbsp; angular
-              <br>
-              &nbsp;&nbsp; ionic
-              <br>
-              &nbsp;&nbsp; three.js 
-              <br>
-              &nbsp;&nbsp; node.js
-
-            </p>
-  
-          </div>
   
           <div class="portfolio_container">
   
             <div class="portfolio_p_container">
-              <p class="portfolio_p">
+              <span class="portfolio_p_desc">
                 private company - software house //
+              </span>
+              <p>
                 &nbsp;&nbsp;
                 <a class="portfolio_a" href="https://www.custombased.com/" target="_blank">
                   <span class="project_title">
@@ -93,8 +81,10 @@
             </div>
   
             <div class="portfolio_p_container">
-              <p class="portfolio_p">
+              <span class="portfolio_p_desc">
                 coffee loyalty system - online ordering - voucher system //
+              </span>
+              <p>
                 &nbsp;&nbsp;
                 <a class="portfolio_a" href="https://www.coffeestamp.co.nz/website/" target="_blank">
                   <span class="project_title">
@@ -110,10 +100,12 @@
             </div>
 
             <div class="portfolio_p_container">
-              <p class="portfolio_p">
+              <span class="portfolio_p_desc">
                 public npm package - learning management system manifest generator //
+              </span>
+              <p>
                 &nbsp;&nbsp;
-                <a class="portfolio_a" href="https://www.npmjs.com/package/scorm-multi-sco-manifest" target="_blank">
+                <a class="portfolio_a" href="https://www.npmjs.com/package/scorm-multi-sco-manifest?activeTab=readme" target="_blank">
                   <span class="project_title">
                     SCORM
                   </span>
@@ -127,10 +119,12 @@
             </div>
 
             <div class="portfolio_p_container">
-              <p class="portfolio_p">
+              <span class="portfolio_p_desc">
                 marzipano - node.js //
+              </span>
+              <p>
                 &nbsp;&nbsp;
-                <a class="portfolio_a" href="https://www.npmjs.com/package/scorm-multi-sco-manifest" target="_blank">
+                <a class="portfolio_a" href="https://github.com/jessehhydee/marzipano-multiresolution-flat-tiler" target="_blank">
                   <span class="project_title">
                     Static
                   </span>
@@ -147,10 +141,12 @@
             </div>
 
             <div class="portfolio_p_container">
-              <p class="portfolio_p">
+              <span class="portfolio_p_desc">
                 marzipano - node.js //
+              </span>
+              <p>
                 &nbsp;&nbsp;
-                <a class="portfolio_a" href="https://www.npmjs.com/package/scorm-multi-sco-manifest" target="_blank">
+                <a class="portfolio_a" href="https://github.com/jessehhydee/marzipano-pano-tiler" target="_blank">
                   <span class="project_title">
                     Equirectangular
                   </span>
@@ -167,10 +163,12 @@
             </div>
 
             <div class="portfolio_p_container">
-              <p class="portfolio_p">
+              <span class="portfolio_p_desc">
                 research - three.js - new tools //
+              </span>
+              <p>
                 &nbsp;&nbsp;
-                <a class="portfolio_a" href="https://www.npmjs.com/package/scorm-multi-sco-manifest" target="_blank">
+                <a class="portfolio_a" href="https://hydeit.co/level-of-detail/" target="_blank">
                   <span class="project_title">
                     Level
                   </span>
@@ -185,6 +183,14 @@
                 .06
               </p>
             </div>
+
+            <div class="info_container_mobile">
+  
+              <p class="info_p"><a class="portfolio_a" href="https://github.com/jessehhydee" target="_blank">github</a>&nbsp;&nbsp; _</p>
+              <p class="info_p"><a class="portfolio_a" href="https://www.linkedin.com/in/jesse-hyde-8135841b9/" target="_blank">linkedin</a>&nbsp;&nbsp; _</p>
+              <p class="info_p"><a class="portfolio_a" href="mailto:jesse@custombased.com" target="_blank">jesse@custombased.com</a>&nbsp;&nbsp; _</p>
+       
+            </div>
   
           </div>
   
@@ -192,10 +198,10 @@
 
         <div class="color_change_container">
 
-          <div class="color_cube brown active_color_cube" onclick="updateTheme('brown')"></div>
-          <div class="color_cube blue" onclick="updateTheme('blue')"></div>
-          <div class="color_cube green" onclick="updateTheme('green')"></div>
-          <div class="color_cube lime" onclick="updateTheme('lime')"></div>
+          <div class="color_cube brown active_color_cube"></div>
+          <div class="color_cube blue"></div>
+          <div class="color_cube green"></div>
+          <div class="color_cube lime"></div>
 
         </div>
   
@@ -204,18 +210,16 @@
           <p class="info_p"><a class="portfolio_a" href="https://github.com/jessehhydee" target="_blank">github</a>&nbsp;&nbsp; _</p>
           <p class="info_p"><a class="portfolio_a" href="https://www.linkedin.com/in/jesse-hyde-8135841b9/" target="_blank">linkedin</a>&nbsp;&nbsp; _</p>
           <p class="info_p"><a class="portfolio_a" href="mailto:jesse@custombased.com" target="_blank">jesse@custombased.com</a>&nbsp;&nbsp; _</p>
-  
+   
         </div>
         
       </div>
-
-      <canvas class="bg_webgl"></canvas>
 
     </div>
 
 
 
-    <script src="js/index.js"></script>
+    <script src="index.js" type="module"></script>
 
   </body>
 
