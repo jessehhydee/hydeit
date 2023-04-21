@@ -46,11 +46,11 @@ currentTheme      = themeColors.brown;
 
 viewportContainer = document.querySelector('.veiwport_container');
 bgCanvas          = document.querySelector('.bg_webgl');
-colorCubeBtns     = document.querySelectorAll(".color_cube");
-brownBtn          = document.querySelector(".brown");
-blueBtn           = document.querySelector(".blue");
-greenBtn          = document.querySelector(".green");
-limeBtn           = document.querySelector(".lime");
+colorCubeBtns     = document.querySelectorAll('.color_cube');
+brownBtn          = document.querySelector('.brown');
+blueBtn           = document.querySelector('.blue');
+greenBtn          = document.querySelector('.green');
+limeBtn           = document.querySelector('.lime');
 
 const bgAnimation = () => {
 
