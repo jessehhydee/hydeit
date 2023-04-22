@@ -6,6 +6,16 @@ html, body {
   padding: 0px;
   margin: 0px;
   color: #2f2f2f;
+  animation: fadeInAnimation ease 2s;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .bg_webgl {
@@ -15,19 +25,6 @@ html, body {
   top: 0px;
   left: 0px;
   z-index: -9;
-  animation: fadeInCanvas 6s;
-}
-
-@keyframes fadeInCanvas {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .veiwport_container {
