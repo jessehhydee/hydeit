@@ -211,6 +211,12 @@ html, body {
   .project_title {
     font-size: 30px;
   }
+  .info_container_mobile {
+    display: flex;
+  }
+  .info_container {
+    display: none;
+  }
 }
 @media only screen and (max-width: 1080px) {
   .portfolio_container {
@@ -226,12 +232,6 @@ html, body {
   }
   .portfolio_p_container p {
     margin: 30px 0px 5px;
-  }
-  .info_container_mobile {
-    display: flex;
-  }
-  .info_container {
-    display: none;
   }
   .color_change_container {
     top: 270px;
