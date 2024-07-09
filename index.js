@@ -22,7 +22,9 @@ colorCubeBtns,
 brownBtn,
 blueBtn,
 greenBtn,
-limeBtn;
+limeBtn,
+bgUpdatedViaUser,
+updateBGColorLoop;
 
 themeColors = {
   brown:  {
@@ -51,6 +53,11 @@ brownBtn          = document.querySelector('.brown');
 blueBtn           = document.querySelector('.blue');
 greenBtn          = document.querySelector('.green');
 limeBtn           = document.querySelector('.lime');
+bgUpdatedViaUser  = false;
+
+const getRandom = (min, max) => {
+  return Math.round(Math.random() * (max - min) + min);
+}
 
 const bgAnimation = () => {
 
@@ -75,9 +82,9 @@ const bgAnimation = () => {
     scene.add(pointLightOne);
 
     lightTimelineOne
-      .to(pointLightOne, {intensity: 17, duration: 7, ease: Sine.easeInOut})
-      .to(pointLightOne, {intensity: 7, duration: 7, ease: Sine.easeInOut})
-      .to(pointLightOne, {intensity: 12, duration: 7, ease: Sine.easeInOut})
+      .to(pointLightOne, {intensity: getRandom(12, 26), duration: 7, ease: Sine.easeInOut})
+      .to(pointLightOne, {intensity: getRandom(1, 11), duration: 7, ease: Sine.easeInOut})
+      .to(pointLightOne, {intensity: getRandom(3, 19), duration: 7, ease: Sine.easeInOut})
       .to(pointLightOne, {intensity: 10, duration: 7, ease: Sine.easeInOut});
 
     pointLightTwo = new THREE.PointLight(currentTheme.light, 10, 40);
@@ -85,9 +92,9 @@ const bgAnimation = () => {
     scene.add(pointLightTwo);
       
     lightTimelineTwo
-      .to(pointLightTwo, {intensity: 27, duration: 5, ease: Sine.easeInOut})
-      .to(pointLightTwo, {intensity: 7, duration: 5, ease: Sine.easeInOut})
-      .to(pointLightTwo, {intensity: 12, duration: 5, ease: Sine.easeInOut})
+      .to(pointLightTwo, {intensity: getRandom(16, 32), duration: 5, ease: Sine.easeInOut})
+      .to(pointLightTwo, {intensity: getRandom(2, 13), duration: 5, ease: Sine.easeInOut})
+      .to(pointLightTwo, {intensity: getRandom(6, 26), duration: 5, ease: Sine.easeInOut})
       .to(pointLightTwo, {intensity: 10, duration: 5, ease: Sine.easeInOut});
 
   }
@@ -160,7 +167,9 @@ const bgAnimation = () => {
 
 }
 
-const updateTheme = (color) => {
+const updateTheme = (color, updatedViaUser = true) => {
+
+  if(updatedViaUser) bgUpdatedViaUser = true;
 
   const updateLights = () => {
 
@@ -168,21 +177,35 @@ const updateTheme = (color) => {
     const colour              = new THREE.Color(themeColors[color].light);
   
     colorChangeTimeline
-      .to(pointLightOne.color, {r: colour.r, g: colour.g, b: colour.b, duration: 2, ease: Sine.easeInOut})
-      .to(pointLightTwo.color, {r: colour.r, g: colour.g, b: colour.b, duration: 3, ease: Sine.easeInOut});
+      .to(pointLightOne.color, {
+        r: colour.r, 
+        g: colour.g, 
+        b: colour.b, 
+        duration: 2, 
+        ease: Sine.easeInOut
+      })
+      .to(pointLightTwo.color, {
+        r: colour.r, 
+        g: colour.g, 
+        b: colour.b, 
+        duration: 3, 
+        ease: Sine.easeInOut
+      });
 
   }
 
   const updateActiveColorCube = () => {
 
-    for(const btn of colorCubeBtns) btn.classList.remove('active_color_cube');
+    for(const btn of colorCubeBtns) 
+      btn.classList.remove('active_color_cube');
     document.querySelector(`.${color}`).classList.add('active_color_cube');
 
   }
 
   const updateContainers = () => {
 
-    document.querySelector('.portfolio_container').style.backgroundColor = `${currentTheme.container}4f`;
+    document.querySelector('.portfolio_container').style.backgroundColor 
+      = `${currentTheme.container}4f`;
     currentTheme = themeColors[color];
 
   }
@@ -193,9 +216,34 @@ const updateTheme = (color) => {
 
 }
 
+const autoUpdateBGColors = () => {
+    
+  updateBGColorLoop 
+    = setTimeout(() => {
+
+      if(!bgUpdatedViaUser) {
+        const color = getRandom(0, 4);
+        updateTheme(
+          color === 0
+            ? 'brown'
+            : color === 1
+              ? 'blue'
+              : color === 2
+                ? 'green'
+                : 'lime',
+          false
+        );
+        autoUpdateBGColors();
+      } else clearTimeout(updateBGColorLoop);
+
+    }, 10000);
+
+}
+
 brownBtn.addEventListener('click', updateTheme.bind(this, 'brown'));
 blueBtn.addEventListener('click', updateTheme.bind(this, 'blue'));
 greenBtn.addEventListener('click', updateTheme.bind(this, 'green'));
 limeBtn.addEventListener('click', updateTheme.bind(this, 'lime'));
 
 bgAnimation();
+autoUpdateBGColors();
