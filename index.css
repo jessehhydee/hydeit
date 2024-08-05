@@ -115,17 +115,12 @@ html, body {
   content: '';
   position: absolute;
   width: 100%;
-  transform: scaleX(0);
+  transform: scaleX(1);
   height: 2px;
   bottom: 0;
   left: 0;
   background-color: #2f2f2f;
   transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
-}
-.portfolio_a:hover:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
 }
 
 .info_container_mobile {
