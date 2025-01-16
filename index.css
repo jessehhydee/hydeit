@@ -88,6 +88,11 @@ html, body {
   text-align: right;
 }
 
+.portfolio_container h2 {
+  margin: 0px;
+  padding-right: 42px;
+}
+
 .portfolio_p_container {
   width: auto;
   height: auto;
@@ -196,6 +201,9 @@ html, body {
   .portfolio_container {
     min-width: 740px;
     margin-top: 170px;
+  }
+  .portfolio_container h2 {
+    padding-right: 0px;
   }
   .portfolio_p_container {
     margin-right: -45px;
